@@ -1,5 +1,9 @@
 package edu.grinnell.csc207.main;
 
+/*
+ * CSC207, MP1 Cipher.java by Jacob Bell.
+ */
+
 import java.io.PrintWriter;
 
 /**
@@ -30,7 +34,8 @@ public class Cipher  {
     String keyStr = "";
 
     if (args.length != LEN_OF_ARGS) {
-      System.err.println("Incorrect amount of commands");
+      System.err.println();
+      return;
     } // if
 
     for (int i = 0; i < args.length; i++) { // Determine what the actions/strings are
@@ -40,6 +45,10 @@ public class Cipher  {
         cipherType = args[i]; //set cipherType to caesar or vigenere
       } else if (message == "") {
         message = args[i]; //set the message to the first non action/cipherType
+        if (message.length() == 1) {
+          System.err.println();
+          return;
+        } //if
       } else if (args[i].length() != 1) {
         keyStr = args[i]; //set the key to whatever the second non action/cipherType
       } else  {
@@ -47,6 +56,28 @@ public class Cipher  {
       } // if
     } // for
 
+    for (char ch : message.toCharArray()) {
+      if (ch >= 'a' && ch <= 'z') {
+        System.err.print("");
+      } //if
+    } //for
+
+    for (char ch : keyStr.toCharArray()) {
+      if (ch < 'a' || ch > 'z') {
+        System.err.print("");
+        return;
+      } //if
+    } //for
+
+    if ((keych == '\0') && (keyStr.equals(""))) {
+      System.err.print("");
+      return;
+    } else if (keych != '\0') { // This is simply saying that if keyStr is defined
+      if (keych < 'a' || keych > 'z') {
+        System.err.print("");
+        return;
+      } //if (nested)
+    } //if
 
     String coded = "";
 
@@ -60,16 +91,13 @@ public class Cipher  {
       } // if (nested)
     } else  { // end of caesar if statement/start of vigenere
       if (action.equals("-encode")) {
-        for (int i = 0; i < LEN_OF_ALPHABET; i++) {
-          edu.grinnell.csc207.util.CipherUtils.vigenereEncrypt(message, keyStr);
-        } // for caesarEncrypt
-      } else  {
-        for (int i = LEN_OF_ALPHABET; i > 0; i--) {
-          edu.grinnell.csc207.util.CipherUtils.vigenereDecrypt(message, keyStr);
-        } // for caesarDecrypt
+        coded = edu.grinnell.csc207.util.CipherUtils.vigenereEncrypt(message, keyStr);
+        pen.print(coded);
+      } else {
+        coded = edu.grinnell.csc207.util.CipherUtils.vigenereDecrypt(message, keyStr);
+        pen.print(coded);
       } // if (nested)
-      pen.close();
-
     } //if
+    pen.close();
   } //main
 } //Cipher

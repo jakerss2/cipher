@@ -1,4 +1,10 @@
 package edu.grinnell.csc207.util;
+
+/*
+ * CSC207, MP1 CipherUtils.java by Jacob Bell.
+ */
+
+
 /**
  * Utility package for ciphers to work.
  */
@@ -25,7 +31,7 @@ public class CipherUtils {
    * @return int
    */
   private static int letter2int(char letter) {
-    return (((int) letter) - LETTER_A); // Int - A
+    return (((int) letter) - LETTER_A); // Int - A(97)
   } //letter2int
 
   /**

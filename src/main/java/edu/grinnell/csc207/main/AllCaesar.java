@@ -4,6 +4,11 @@ import java.io.PrintWriter;
 
 import edu.grinnell.csc207.util.CipherUtils;
 
+/*
+ * CSC207, MP1 AllCaesar.java by Jacob Bell.
+ */
+
+
 /**
 * AllCaesar checks what the user input is and determines which functions to run.
 */
@@ -12,7 +17,7 @@ public class AllCaesar {
   /**
    * Length of arguments that are to be given.
    */
-  public static final int LEN_OF_ARGS = 4;
+  public static final int LEN_OF_ARGS = 2;
 
   /**
    * Main method to print commands.
@@ -22,14 +27,25 @@ public class AllCaesar {
 
     PrintWriter pen = new PrintWriter(System.out, true);
 
-    if (args.length == 1 || args.length == LEN_OF_ARGS) {
-      System.err.println("Incorrect number of parameters");
+    if (!(args.length == LEN_OF_ARGS)) {
+      System.err.print("");
+      return;
     } //if
 
-    if (!((args[0].equals("encode")) || (args[0].equals("decode")))) {
-      System.err.println("Valid options are \"encode\" or \"decode\"");
-      System.exit(1);
-    } //If user input isn't encode or decode.
+    if (args[1].equals("")) {
+      System.err.print("");
+    } //if
+
+    if (!(args[0].equals("encode") || args[0].equals("decode"))) {
+      System.err.print("");
+      return;
+    } //if
+
+    for (char ch : args[1].toCharArray()) {
+      if (ch >= 'a' && ch <= 'z') {
+        System.err.print("");
+      } //if
+    } //for
 
     if (args[0].equals("encode")) {
       for (char ch = 'a'; ch <= 'z'; ch++) {
