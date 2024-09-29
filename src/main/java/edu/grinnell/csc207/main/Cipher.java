@@ -34,19 +34,25 @@ public class Cipher  {
     String keyStr = "";
 
     if (args.length != LEN_OF_ARGS) {
-      System.err.println();
+      System.err.println("Error: not enough args");
       return;
     } // if
 
     for (int i = 0; i < args.length; i++) { // Determine what the actions/strings are
+
+      if (args[i].equals("")) {
+        System.err.println("Error: Empty");
+        return;
+      } // if
+
       if (args[i].equals("-encode") || (args[i].equals("-decode"))) {
         action = args[i]; //set action to encode or decode
       } else if (args[i].equals("-caesar") || args[i].equals("-vigenere")) {
         cipherType = args[i]; //set cipherType to caesar or vigenere
       } else if (message == "") {
         message = args[i]; //set the message to the first non action/cipherType
-        if (message.length() == 1) {
-          System.err.println();
+        if (message.length() == 0) {
+          System.err.println("Error: Empty");
           return;
         } //if
       } else if (args[i].length() != 1) {
@@ -57,24 +63,24 @@ public class Cipher  {
     } // for
 
     for (char ch : message.toCharArray()) {
-      if (ch >= 'a' && ch <= 'z') {
-        System.err.print("");
+      if (!(ch >= 'a' && ch <= 'z')) {
+        System.err.print("Error: not lowercase");
       } //if
     } //for
 
     for (char ch : keyStr.toCharArray()) {
       if (ch < 'a' || ch > 'z') {
-        System.err.print("");
+        System.err.print("Error: not lowercase");
         return;
       } //if
     } //for
 
     if ((keych == '\0') && (keyStr.equals(""))) {
-      System.err.print("");
+      System.err.print("Error: not lowercase");
       return;
     } else if (keych != '\0') { // This is simply saying that if keyStr is defined
       if (keych < 'a' || keych > 'z') {
-        System.err.print("");
+        System.err.print("Error: not lowercase");
         return;
       } //if (nested)
     } //if
@@ -82,6 +88,10 @@ public class Cipher  {
     String coded = "";
 
     if (cipherType.equals("-caesar")) { // Ask what cipher it is
+      if (keyStr.length() > 0) {
+        System.err.print("Error: Incorrect message size");
+        return;
+      } // if
       if (action.equals("-encode")) { //Encode or decode
         coded = edu.grinnell.csc207.util.CipherUtils.caesarEncrypt(message, keych);
         pen.print(coded);

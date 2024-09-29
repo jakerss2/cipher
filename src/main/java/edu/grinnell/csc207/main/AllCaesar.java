@@ -28,7 +28,7 @@ public class AllCaesar {
     PrintWriter pen = new PrintWriter(System.out, true);
 
     if (!(args.length == LEN_OF_ARGS)) {
-      System.err.print("");
+      System.err.print("Error: Incorrect num of args, expected 4 got " + args.length);
       return;
     } //if
 
@@ -37,7 +37,7 @@ public class AllCaesar {
     } //if
 
     if (!(args[0].equals("encode") || args[0].equals("decode"))) {
-      System.err.print("");
+      System.err.print("Error: Needs encode or decode");
       return;
     } //if
 
